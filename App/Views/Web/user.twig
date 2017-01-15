@@ -1,0 +1,39 @@
+{% extends "page.twig" %}
+
+{% block title %}Assessment user{% endblock %}
+
+{% block content %}
+
+    <h1>User</h1>
+
+        <fieldset>
+            <label for="firstname">First name</label>
+            <input id="firstname" name="firstname" type="text" value="{{ user.db_firstname }}">
+            <br/>
+
+            <label for="initials">Initials</label>
+            <input id="initials" name="initials" type="text" value="{{ user.db_initials }}">
+            <br/>
+
+            <label for="lastname">Last name</label>
+            <input id="lastname" name="lastname" type="text" value="{{ user.db_lastname }}">
+            <br/>
+
+            <label for="postal_code">Postal code</label>
+            <input id="postal_code" name="postal_code" type="text" value="{{ user.db_postal_code }}">
+            <br/>
+
+            <label for="housenumber">Housenumber</label>
+            <input id="housenumber" name="housenumber" type="text" value="{{ user.db_housenumber }}">
+            <br/>
+
+            <label for="email">Email adress</label>
+            <input id="email" name="email" type="text" value="{{ user.db_email }}">
+            <br/>
+
+            <label for="phonenumber">Phonenumber</label>
+            <input id="phonenumber" name="phonenumber" type="text" value="{{ user.db_phonenumber }}">
+            <br/>
+        </fieldset>
+
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "page.twig" %}
+
+{% block title %}Assessment form{% endblock %}
+
+{% block content %}
+
+    {% set firstname = '' %}
+    {% if user_input['firstname'] is defined %}
+        {% set firstname = user_input['firstname'] %}
+    {% endif %}
+
+    {% set initials = '' %}
+    {% if user_input['initials'] is defined %}
+        {% set initials = user_input['initials'] %}
+    {% endif %}
+
+    {% set lastname = '' %}
+    {% if user_input['lastname'] is defined %}
+        {% set lastname = user_input['lastname'] %}
+    {% endif %}
+
+    {% set postal_code = '' %}
+    {% if user_input['postal_code'] is defined %}
+        {% set postal_code = user_input['postal_code'] %}
+    {% endif %}
+
+    {% set housenumber = '' %}
+    {% if user_input['housenumber'] is defined %}
+        {% set housenumber = user_input['housenumber'] %}
+    {% endif %}
+
+    {% set email = '' %}
+    {% if user_input['email'] is defined %}
+        {% set email = user_input['email'] %}
+    {% endif %}
+
+    {% set phonenumber = '' %}
+    {% if user_input['phonenumber'] is defined %}
+        {% set phonenumber = user_input['phonenumber'] %}
+    {% endif %}
+
+<h1>New user</h1>
+
+    <form method="post" action="{{ path_for('index_process') }}">
+
+        {% if errors is not empty %}
+            {% for error in errors %}
+                <span>Error: </span> {{ error }} <br/>
+            {% endfor %}
+        {% endif %}
+
+        <fieldset>
+            <label for="firstname">First name</label>
+            <input id="firstname" name="firstname" type="text" value="{{ firstname }}">
+            <br/>
+
+            <label for="initials">Initials</label>
+            <input id="initials" name="initials" type="text" value="{{ initials }}">
+            <br/>
+
+            <label for="lastname">Last name</label>
+            <input id="lastname" name="lastname" type="text" value="{{ lastname }}">
+            <br/>
+
+            <label for="postal_code">Postal code</label>
+            <input id="postal_code" name="postal_code" type="text" value="{{ postal_code }}">
+            <br/>
+
+            <label for="housenumber">Housenumber</label>
+            <input id="housenumber" name="housenumber" type="text" value="{{ housenumber }}">
+            <br/>
+
+            <label for="email">Email adress</label>
+            <input id="email" name="email" type="text" value="{{ email }}">
+            <br/>
+
+            <label for="phonenumber">Phonenumber</label>
+            <input id="phonenumber" name="phonenumber" type="text" value="{{ phonenumber }}">
+            <br/>
+
+            <label for="password1">Password</label>
+            <input id="password1" name="password1" type="text" value="">
+            <br/>
+
+            <label for="password2">Repeat password</label>
+            <input id="password2" name="password2" type="text" value="">
+            <br/>
+
+            <button type="submit" value="Submit">Submit</button>
+        </fieldset>
+    </form>
+
+{% endblock %}
