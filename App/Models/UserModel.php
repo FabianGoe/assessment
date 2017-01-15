@@ -10,16 +10,38 @@ class UserModel
     /** @var array */
     private $errors;
 
-    public $db_id,
-        $db_firstname,
-        $db_initials,
-        $db_lastname,
-        $db_postal_code,
-        $db_housenumber,
-        $db_email,
-        $db_phonenumber,
-        $db_password;
+    /** @var int */
+    public $db_id;
 
+    /** @var string */
+    public $db_firstname;
+
+    /** @var string */
+    public $db_initials;
+
+    /** @var string */
+    public $db_lastname;
+
+    /** @var string */
+    public $db_postal_code;
+
+    /** @var int */
+    public $db_housenumber;
+
+    /** @var string */
+    public $db_email;
+
+    /** @var string */
+    public $db_phonenumber;
+
+    /** @var string */
+    public $db_password;
+
+    /**
+     * UserModel constructor to inject app settings
+     *
+     * @param array $settings
+     */
     public function __construct($settings)
     {
         $this->settings = $settings;
@@ -28,6 +50,8 @@ class UserModel
     /**
      * @param array $params
      * @param boolean $validateUserInput
+     *
+     * @return bool
      */
     public function initialize(array $params, $validateUserInput)
     {
@@ -94,8 +118,19 @@ class UserModel
         if ($validateUserInput) {
             $this->createPassword($params['password1'], $params['password2']);
         }
+
+        if (!empty($this->errors)) {
+            return false;
+        }
+
+        return true;
     }
 
+    /**
+     * @param $id
+     *
+     * @throws \InvalidArgumentException
+     */
     public function setId($id)
     {
         // not required
@@ -112,6 +147,11 @@ class UserModel
         $this->db_id = $id;
     }
 
+    /**
+     * @param $firstname
+     *
+     * @throws \InvalidArgumentException
+     */
     public function setFirstName($firstname)
     {
         $firstname = filter_var($firstname, FILTER_SANITIZE_STRING);
@@ -123,6 +163,11 @@ class UserModel
         $this->db_firstname = $firstname;
     }
 
+    /**
+     * @param $initials
+     *
+     * @throws \InvalidArgumentException
+     */
     public function setInitials($initials)
     {
         $initials = filter_var($initials, FILTER_SANITIZE_STRING);
@@ -142,6 +187,11 @@ class UserModel
         $this->db_initials = $initials;
     }
 
+    /**
+     * @param $lastname
+     *
+     * @throws \InvalidArgumentException
+     */
     public function setLastName($lastname)
     {
         $lastname = filter_var($lastname, FILTER_SANITIZE_STRING);
@@ -153,6 +203,11 @@ class UserModel
         $this->db_lastname = $lastname;
     }
 
+    /**
+     * @param $postalCode
+     *
+     * @throws \InvalidArgumentException
+     */
     public function setPostalCode($postalCode)
     {
         $postalCode = filter_var($postalCode, FILTER_SANITIZE_STRING);
@@ -168,6 +223,11 @@ class UserModel
         $this->db_postal_code = str_replace(' ', '', $postalCode);
     }
 
+    /**
+     * @param $houseNumber
+     *
+     * @throws \InvalidArgumentException
+     */
     public function setHouseNumber($houseNumber)
     {
         if (!$houseNumber) {
@@ -275,6 +335,10 @@ class UserModel
         $this->db_phonenumber = $number;
     }
 
+    /**
+     * @param string $password1
+     * @param string $password2
+     */
     public function createPassword($password1, $password2)
     {
         if ($this->validatePasswords($password1, $password2)) {
@@ -282,6 +346,12 @@ class UserModel
         }
     }
 
+    /**
+     * @param string $password1
+     * @param string $password2
+     *
+     * @return bool
+     */
     public function validatePasswords($password1, $password2)
     {
         $correct = true;
@@ -314,6 +384,9 @@ class UserModel
         return $correct;
     }
 
+    /**
+     * @return array
+     */
     public function getErrors()
     {
         return $this->errors;

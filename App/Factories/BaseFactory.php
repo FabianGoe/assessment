@@ -14,12 +14,8 @@ abstract class BaseFactory
     protected $errors = [];
 
     /**
-    * BaseController Constructor
-    * Sets dependencies in class variables for easier access
-    *
-    * ModelFactory constructor.
-    * @param \Slim\Container $container
-    */
+     * @param \Slim\Container $container
+     */
     public function __construct($container)
     {
     $this->settings = $container->get('settings');
